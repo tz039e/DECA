@@ -56,7 +56,8 @@ def main(args):
                 tform = torch.inverse(tform).transpose(1,2).to(device)
                 original_image = testdata[i]['original_image'][None, ...].to(device)
                 _, orig_visdict = deca.decode(codedict, render_orig=True, original_image=original_image, tform=tform)    
-                orig_visdict['inputs'] = original_image            
+                orig_visdict['inputs'] = original_image
+                opdict['pose'] = codedict['pose']
 
         if args.saveDepth or args.saveKpt or args.saveObj or args.saveMat or args.saveImages:
             os.makedirs(os.path.join(savefolder, name), exist_ok=True)
